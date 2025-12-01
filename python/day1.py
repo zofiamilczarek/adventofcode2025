@@ -78,7 +78,7 @@ def get_secret_code_0x434C49434B(rotations):
     return nb_zeros
 
 
-with open("input_day1.txt", "r") as f:
+with open("./input_day1.txt", "r") as f:
     rotations = f.readlines()
 
 test_input = """L68
@@ -94,7 +94,7 @@ L82""".split(
     "\n"
 )
 
-# print(f"The secret code : {get_secret_code(test_input)}")
+print(f"The secret code : {get_secret_code(rotations)}")
 
 
 case1 = """L50

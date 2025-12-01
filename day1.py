@@ -53,17 +53,25 @@ def get_secret_code_0x434C49434B(rotations):
         current_tick = current_rotation_result % 100
         new_tick = (current_tick + value) % 100
 
-        error_msg = f"The dial is rotated {rotation} to point at {new_tick}."
+        error_msg = f"The dial is rotated {rotation} to point at {new_tick}. The rotation value was {current_tick + value}."
+        # if current_tick == 0:
+        #     current_tick = 100
+        nb_passes_0 = abs(abs(current_tick + value) // 100)
+        if sign == -1 and new_tick > current_tick and current_tick != 0:
+            nb_passes_0 += 1
 
-        if new_tick == 0:
-            nb_zeros += 1
-
-        nb_passes_0 = abs((current_tick + value) // 100)
         if nb_passes_0 > 0:
             error_msg += f" During this rotation, it points at '0' {nb_passes_0} times."
+
+        if new_tick == 0 and current_tick + value != 100:
+            nb_passes_0 += 1
+
+        if nb_passes_0 > 0:
+            error_msg += f" Incremented code by {nb_passes_0}"
+
         nb_zeros += nb_passes_0
 
-        print(error_msg)
+        # print(error_msg)
 
         current_rotation_result += value
 
@@ -86,8 +94,18 @@ L82""".split(
     "\n"
 )
 
-print(f"The secret code : {get_secret_code(test_input)}")
+# print(f"The secret code : {get_secret_code(test_input)}")
+
+
+case1 = """L50
+L5
+L10""".split(
+    "\n"
+)
+
+
+print(f"The secret code (method 0x434C49434B): {get_secret_code_0x434C49434B(case1)}")
 
 print(
-    f"The secret code (method 0x434C49434B): {get_secret_code_0x434C49434B(test_input)}"
+    f"The secret code (method 0x434C49434B): {get_secret_code_0x434C49434B(rotations)}"
 )

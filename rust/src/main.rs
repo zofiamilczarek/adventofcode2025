@@ -1,7 +1,10 @@
 mod day1;
+mod day2;
 
 fn main() {
-    println!("Hello, world!");
-
+    println!("\n=== Answers for Day 1 ===");
     day1::print_answer();
+
+    println!("\n=== Answers for Day 2 ===");
+    day2::print_answer();
 }

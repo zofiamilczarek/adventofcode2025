@@ -119,7 +119,7 @@ fn get_invalid_inputs_sum(inputs : &String, part : i32) -> i64 {
 pub fn print_answer() {
 
     // let test_input = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124".to_string();
-    let real_input = lines_from_file("../input_day2.txt")[0].clone();
+    let real_input = lines_from_file("input_day2.txt")[0].clone();
 
 
     let res_part1 = get_invalid_inputs_sum(&real_input, 1);

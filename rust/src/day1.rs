@@ -51,7 +51,7 @@ fn get_secret_code_part2_iter(rotations: &Vec<String>) -> i32 {
         sign = value.signum();
         value = value.abs();
         // println!("Rotation : {} {}", sign, value);
-        for tick in 0..value {
+        for _tick in 0..value {
             current_tick = (current_tick + sign).rem_euclid(100);
             if current_tick == 0 {
                 nb_zeros+=1;
@@ -102,10 +102,10 @@ fn get_secret_code_part2(rotations: &Vec<String>) -> i32 {
 
 
 pub fn print_answer() {
-    let test_input : Vec<String> = vec!["L68", "L30", "R48","L5","R60","L55","L1","L99","R14","L82"]
-                            .iter()
-                            .map(|x| x.to_string())
-                            .collect();
+    // let test_input : Vec<String> = vec!["L68", "L30", "R48","L5","R60","L55","L1","L99","R14","L82"]
+    //                         .iter()
+    //                         .map(|x| x.to_string())
+    //                         .collect();
 
     let real_input = lines_from_file("/Users/zofia/Documents/projects/adventofcode2025/input_day1.txt");
 

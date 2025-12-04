@@ -34,7 +34,7 @@ fn get_neighbour_idxes(idx: &[i32; 2], shape: &[i32; 2]) -> Vec<[usize; 2]> {
 
 fn get_nb_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
     let mut total_nb_forkable_rolls = 0;
-    let mut nb_neighboring_rolls = 0;
+    let mut nb_neighboring_rolls;
     let mut idx: [i32; 2];
     let shape = [grid.len() as i32, grid[0].chars().count() as i32];
 
@@ -53,6 +53,10 @@ fn get_nb_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
 
     total_nb_forkable_rolls
 }
+
+
+
+
 
 pub fn print_answer() {
     let real_input = lines_from_file("input_day4.txt");

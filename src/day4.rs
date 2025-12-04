@@ -16,14 +16,14 @@ fn count_neighboring_rolls(idxes: Vec<[usize; 2]>, grid: &Vec<String>) -> i32 {
 
 fn get_neighbour_idxes(idx: &[i32; 2], shape: &[i32; 2]) -> Vec<[usize; 2]> {
     let mut idxes: Vec<[usize; 2]> = Vec::new();
-    for i in (1..-1).rev() {
-        for j in (1..-1).rev() {
+    for i in -1..=1 {
+        for j in -1..=1 {
+
             if (idx[0] + i >= 0)
-                && (idx[1] + j >= 0)
+                && (idx[1] + j >= 0) // i and j dont make the idx below 0
                 && (idx[0] + i < shape[0])
-                && (idx[1] + j < shape[1])
-                && i != 0
-                && j != 0
+                && (idx[1] + j < shape[1]) // i and j dont make the idx bigger than the size of the list
+                && !(i == j && i == 0) // i and j aren't both 0 (which would just add the idx itself)
             {
                 idxes.push([(idx[0] + i) as usize, (idx[1] + j) as usize]);
             }
@@ -55,25 +55,11 @@ fn get_nb_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
 }
 
 pub fn print_answer() {
-    // let real_input = lines_from_file("input_day4.txt");
-    let test_input = lines_from_file("test_input_day4.txt");
-
-    println!("{:?}", test_input);
-
-    let idx = [2, 2];
-    let shape = [
-        test_input.len() as i32,
-        test_input[0].chars().count() as i32,
-    ];
-
-    // println!(
-    //     "for point {:?} there are {} neighboring rolls",
-    //     idx,
-    //     count_neighboring_rolls(get_neighbour_idxes(&idx, &shape), &test_input)
-    // );
+    let real_input = lines_from_file("input_day4.txt");
+    // let test_input = lines_from_file("test_input_day4.txt");
 
     println!(
         "The number of paper rolls accessible by a fork lift (part 1) is {}",
-        get_nb_rolls(&test_input, 4)
+        get_nb_rolls(&real_input, 4)
     );
 }

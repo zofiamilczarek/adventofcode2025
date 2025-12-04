@@ -8,10 +8,10 @@ fn main() {
     day1::print_answer();
 
     println!("\n=== Answers for Day 2 ===");
-    day2::print_answer();
+    // day2::print_answer();
 
     println!("\n=== Answers for Day 3 ===");
-    // day3::print_answer();
+    day3::print_answer();
 
     println!("\n=== Answers for Day 4 ===");
     day4::print_answer();

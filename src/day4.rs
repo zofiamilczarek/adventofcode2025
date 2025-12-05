@@ -32,10 +32,11 @@ fn get_neighbour_idxes(idx: &[i32; 2], shape: &[i32; 2]) -> Vec<[usize; 2]> {
     idxes
 }
 
-fn get_nb_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
+fn get_nb_rolls(grid: &Vec<String>, max_n: i32) -> (i32, Vec<[usize;2]>) {
     let mut total_nb_forkable_rolls = 0;
     let mut nb_neighboring_rolls;
     let mut idx: [i32; 2];
+    let mut forked_idxes: Vec<[usize;2]> = Vec::new();
     let shape = [grid.len() as i32, grid[0].chars().count() as i32];
 
     for (i, row) in (&grid).iter().enumerate() {
@@ -46,13 +47,41 @@ fn get_nb_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
                     count_neighboring_rolls(get_neighbour_idxes(&idx, &shape), grid);
                 if nb_neighboring_rolls < max_n {
                     total_nb_forkable_rolls += 1;
+                    forked_idxes.push([i,j]);
                 }
             }
         }
     }
 
-    total_nb_forkable_rolls
+    (total_nb_forkable_rolls, forked_idxes)
 }
+
+
+
+fn get_nb_removable_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
+        let mut tmp_grid = grid.clone();
+
+        let mut curr_nb_forkable_rolls = 1;
+        let mut total_nb_removals = 0;
+        let mut curr_removed_idxes: Vec<[usize;2]>;
+        let mut i;
+        let mut j;
+        
+        while curr_nb_forkable_rolls > 0 {
+            (curr_nb_forkable_rolls, curr_removed_idxes) = get_nb_rolls(&tmp_grid, max_n);
+            total_nb_removals += curr_nb_forkable_rolls;
+
+            for idx in curr_removed_idxes {
+                [i, j] = idx;
+                tmp_grid[i].replace_range(j..j+1, "x"); // assuming the symbols in grid as ASCII
+            }
+            // println!("{:#?}", tmp_grid);
+        }
+
+        total_nb_removals
+    }
+
+
 
 
 
@@ -60,10 +89,15 @@ fn get_nb_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
 
 pub fn print_answer() {
     let real_input = lines_from_file("input_day4.txt");
-    // let test_input = lines_from_file("test_input_day4.txt");
+    let test_input = lines_from_file("test_input_day4.txt");
 
     println!(
         "The number of paper rolls accessible by a fork lift (part 1) is {}",
-        get_nb_rolls(&real_input, 4)
+        get_nb_rolls(&real_input, 4).0
+    );
+
+    println!(
+        "The number of forkable paper rolls (part 1) is {}",
+        get_nb_removable_rolls(&real_input, 4)
     );
 }

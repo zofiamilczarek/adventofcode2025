@@ -20,24 +20,22 @@ fn is_fresh(number: i64, ranges : &Vec<[i64;2]>) -> bool{
 fn get_numbers_ranges(lines : &Vec<String>) -> (Vec<i64>, Vec<[i64;2]>){
     let mut numbers = Vec::new();
     let mut ranges: Vec<[i64;2]> = Vec::new();
-    let mut curr_range;
-    let mut is_number =true;
+    let mut is_number =false;
 
     for line in lines{
         println!("{line}");
         if line == &"".to_string() {
-            is_number = false;
+            is_number = true;
         }
         else {
             if is_number {
             numbers.push(line.parse::<i64>().unwrap());
         }
         else {
-            // curr_range = line.split('-').map(|x| x.parse::<u64>());
 
             ranges.push(line.split('-')
-                                        .map(|x| x.parse::<i64>().unwrap())
-                                        .collect::<Vec<i64>>().try_into().unwrap());
+                            .map(|x| x.parse::<i64>().unwrap())
+                            .collect::<Vec<i64>>().try_into().unwrap());
         }
         }
 

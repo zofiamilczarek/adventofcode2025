@@ -5,10 +5,12 @@ use crate::day7::utils::utils::lines_from_file;
 
 
 
-fn get_new_line(prev_line: &Vec<char>, curr_line: &Vec<char>) -> Vec<char>{
+fn get_new_line_and_nb_splits(prev_line: &Vec<char>, curr_line: &Vec<char>) -> (Vec<char>, i32){
     // if curr char == ^ and char_above == | then char-1 and char+1 = |
     let mut new_line = curr_line.iter().copied().collect::<Vec<char>>();
+    let mut nb_splits = 0;
     for (i, ch) in curr_line.iter().enumerate() {
+        // if split
         if ch == &'^' && prev_line[i] == '|' {
             if i >= 1 {
                 new_line[i-1] = '|';
@@ -16,25 +18,31 @@ fn get_new_line(prev_line: &Vec<char>, curr_line: &Vec<char>) -> Vec<char>{
             if i + 1 < curr_line.len() {
                 new_line[i+1] = '|';
             }
+            nb_splits+=1;
         }
-        else if prev_line[i] == 'S' {
+        else if prev_line[i] == 'S' || prev_line[i] == '|' {
             new_line[i] = '|';
         }
     }
 
-    new_line
+    (new_line, nb_splits)
 }
 
 
-fn run_beams(lines: Vec<Vec<char>>) -> Vec<String> {
+fn run_beams(lines: Vec<Vec<char>>) -> (Vec<String>, i32) {
     let nb_lines = lines.len();
     let mut new_lines = vec![lines[0].iter().copied().collect::<Vec<char>>()];
+    let mut total_nb_splits = 0;
+    let mut nb_splits;
+    let mut new_line;
 
     for i in 0..(nb_lines-1) {
-        new_lines.push(get_new_line(&lines[i], &lines[i+1]));
+        (new_line, nb_splits) = get_new_line_and_nb_splits(&new_lines[i], &lines[i+1]);
+        new_lines.push(new_line);
+        total_nb_splits += nb_splits;
     }
 
-    new_lines.iter().map(|line| line.iter().collect::<String>()).collect()
+    (new_lines.iter().map(|line| line.iter().collect::<String>()).collect(), total_nb_splits)
 }
 
 
@@ -44,7 +52,7 @@ pub fn print_answer() {
                                             .map(|x| x.chars().collect())
                                             .collect::<Vec<Vec<char>>>();
 
-
-    println!("{}", run_beams(lines));
+    let (beams, nbsplits) = run_beams(lines);
+    println!("{:#?}\n\nThe beam split {} times", beams, nbsplits);
 
 }

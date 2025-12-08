@@ -79,12 +79,10 @@ fn merge_2ranges(range1: &[i64;2], range2: &[i64;2]) -> Vec<[i64;2]> {
     // if end of range 1 is bigger than start of range2 -> merge
     if range1[1] >= range2[0] {
         // start = start of range1, end= max(end_range1, end_range2)
-        println!("ranges :      {:?}, {:?}      merged into     {:?}", range1, range2, vec![[range1[0], range2[1].max(range1[1])]]);
         return vec![[range1[0], range2[1].max(range1[1])]];
     }
     // else, return the same ranges
     else {
-        println!("ranges :      {:?}, {:?}      are non-overlapping", range1, range2);
         return vec![*range1, *range2];
     }
 }
@@ -111,8 +109,6 @@ fn get_nb_fresh_ids(ranges: Vec<[i64;2]>) -> i64 {
     for range in &minimal_ranges {
         sum+= range[1] - range[0] + 1;
     }
-
-    println!("merged ids : {:#?}", minimal_ranges);
 
     sum
 }

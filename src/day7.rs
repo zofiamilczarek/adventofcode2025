@@ -6,7 +6,6 @@ use crate::day7::utils::utils::lines_from_file;
 
 
 fn get_new_line_and_nb_splits(prev_line: &Vec<char>, curr_line: &Vec<char>) -> (Vec<char>, i32){
-    // if curr char == ^ and char_above == | then char-1 and char+1 = |
     let mut new_line = curr_line.iter().copied().collect::<Vec<char>>();
     let mut nb_splits = 0;
     for (i, ch) in curr_line.iter().enumerate() {
@@ -52,7 +51,7 @@ pub fn print_answer() {
                                             .map(|x| x.chars().collect())
                                             .collect::<Vec<Vec<char>>>();
 
-    let (beams, nbsplits) = run_beams(lines);
-    println!("{:#?}\n\nThe beam split {} times", beams, nbsplits);
+    let (_beams, nbsplits) = run_beams(lines);
+    println!("The beam split {} times", nbsplits);
 
 }

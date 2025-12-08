@@ -56,15 +56,6 @@ fn get_nb_fresh(numbers: &Vec<i64>, ranges : &Vec<[i64;2]>) -> i32 {
     nb_fresh
 }
 
-fn map_bool_to_status(b: bool) -> String {
-    if b {
-        return "fresh".to_string();
-    }
-    else {
-        return "spoiled".to_string();
-    }
-}
-
 
 fn sort_ranges(ranges : &Vec<[i64;2]>) -> Vec<[i64;2]> {
     let mut sorted = ranges.clone();
@@ -115,8 +106,8 @@ fn get_nb_fresh_ids(ranges: Vec<[i64;2]>) -> i64 {
 
 
 pub fn print_answer() {
-    let lines = lines_from_file("input_day5.txt");
-    // let lines = lines_from_file("test_input_day5.txt");
+    let lines = lines_from_file("data/input_day5.txt");
+    // let lines = lines_from_file("data/test_input_day5.txt");
     let numbers;
     let ranges;
     (numbers, ranges) = get_numbers_ranges(&lines);

@@ -42,7 +42,7 @@ fn get_total_joltage(battery:&Vec<String>, n: usize) -> i64 {
 }
 
 pub fn print_answer() {
-    let real_input = lines_from_file("input_day3.txt");
+    let real_input = lines_from_file("data/input_day3.txt");
 
     // let test_input: Vec<String>= vec!["987654321111111","811111111111119","234234234234278","818181911112111"].iter()
     //                         .map(|x| x.to_string())

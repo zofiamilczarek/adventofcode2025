@@ -88,8 +88,8 @@ fn get_nb_removable_rolls(grid: &Vec<String>, max_n: i32) -> i32 {
 
 
 pub fn print_answer() {
-    let real_input = lines_from_file("input_day4.txt");
-    let test_input = lines_from_file("test_input_day4.txt");
+    let real_input = lines_from_file("data/input_day4.txt");
+    let test_input = lines_from_file("data/test_input_day4.txt");
 
     println!(
         "The number of paper rolls accessible by a fork lift (part 1) is {}",

@@ -107,7 +107,7 @@ pub fn print_answer() {
     //                         .map(|x| x.to_string())
     //                         .collect();
 
-    let real_input = lines_from_file("input_day1.txt");
+    let real_input = lines_from_file("data/input_day1.txt");
 
     let input = real_input;
 
